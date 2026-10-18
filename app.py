@@ -1,12 +1,10 @@
 import gradio as gr
 from transformers import AutoTokenizer, T5ForConditionalGeneration
 
-# Load the correct model and tokenizer
 tokenizer = AutoTokenizer.from_pretrained("t5-small")
 model = T5ForConditionalGeneration.from_pretrained("t5-small")
 
 
-# Define inference function for translation with language selection
 def translate_text(text, language):
     language_code = {
         "French": "translate English to French",
@@ -21,7 +19,6 @@ def translate_text(text, language):
     return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
 
-# Create Gradio app interface
 input_text = gr.Textbox(lines=3, placeholder="Enter text to translate")
 language_dropdown = gr.Dropdown(choices=["French", "German", "Romanian", "English"], label="Select target language")
 output_text = gr.Textbox(label="Translated Text")
